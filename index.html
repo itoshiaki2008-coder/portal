@@ -622,7 +622,7 @@ const GAS_URL = 'ここにGASデプロイURLを貼り付け';
   }
 
   // GAS_URL が未設定の場合はスキップ
-  if (!GAS_URL =　'https://script.google.com/macros/s/AKfycbxHpKyhVxGJ0nELmMglo6qQ0udKxGcSRedxy_d9kfEUqv1RiEqOp2xpXvVmWdY0Pxlxlw/exec';{ setError(); return; }
+  GAS_URL =　'https://script.google.com/macros/s/AKfycbxHpKyhVxGJ0nELmMglo6qQ0udKxGcSRedxy_d9kfEUqv1RiEqOp2xpXvVmWdY0Pxlxlw/exec';
 
   try {
     const res = await fetch(GAS_URL, { method: 'GET' });
