@@ -553,6 +553,28 @@ h1 {
 
   <footer class="footer">
     <div>Small Craft Inspection Tools</div>
+
+  <!-- ▼ 訪問カウンター ここに挿入 ▼ -->
+    <div class="visit-counter" id="visitCounter">
+      <div class="visit-item">
+        <span class="visit-label">本日</span>
+        <span class="visit-value loading" id="vc-day">…</span>
+      </div>
+      <div class="visit-item">
+        <span class="visit-label">直近1週間</span>
+        <span class="visit-value loading" id="vc-week">…</span>
+      </div>
+      <div class="visit-item">
+        <span class="visit-label">直近1ヶ月</span>
+        <span class="visit-value loading" id="vc-month">…</span>
+      </div>
+      <div class="visit-item">
+        <span class="visit-label">直近1年</span>
+        <span class="visit-value loading" id="vc-year">…</span>
+      </div>
+    </div>
+    <!-- ▲ 訪問カウンター ここまで ▲ -->
+    
     <div>日本小型船舶検査機構 検査細則に基づく参考計算ツール</div>
     <div style="margin-top:0.5rem">
       <a href="https://jci.go.jp" target="_blank">jci.go.jp</a>
@@ -565,6 +587,47 @@ h1 {
   </footer>
 
 </div>
+<script>
+// ============================================================
+// 訪問カウンター
+// GAS_URL に Google Apps Script のデプロイURLを貼り付けてください
+// ============================================================
+const GAS_URL = 'ここにGASデプロイURLを貼り付け';
+
+(async function () {
+  const ids = { day: 'vc-day', week: 'vc-week', month: 'vc-month', year: 'vc-year' };
+
+  function set(key, val) {
+    const el = document.getElementById(ids[key]);
+    if (!el) return;
+    el.textContent = val.toLocaleString();
+    el.classList.remove('loading');
+  }
+
+  function setError() {
+    Object.values(ids).forEach(id => {
+      const el = document.getElementById(id);
+      if (el) { el.textContent = '-'; el.classList.remove('loading'); }
+    });
+  }
+
+  // GAS_URL が未設定の場合はスキップ
+  if (!GAS_URL || GAS_URL.includes('ここに')) { setError(); return; }
+
+  try {
+    const res = await fetch(GAS_URL, { method: 'GET' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    set('day',   data.day   ?? 0);
+    set('week',  data.week  ?? 0);
+    set('month', data.month ?? 0);
+    set('year',  data.year  ?? 0);
+  } catch (e) {
+    console.warn('visit counter error:', e);
+    setError();
+  }
+})();
+</script>
 
 </body>
 </html>
