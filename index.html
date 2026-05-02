@@ -100,7 +100,6 @@ body {
   padding: 4rem 1.5rem 8rem;
 }
 
-/* ── Header ── */
 .header {
   text-align: center; margin-bottom: 4rem;
   animation: fade-down 0.8s ease both;
@@ -152,7 +151,6 @@ h1 {
   line-height: 1.8; max-width: 480px; margin: 0 auto;
 }
 
-/* ── Section label ── */
 .section-label {
   display: flex; align-items: center; gap: 12px;
   margin-bottom: 1.2rem; animation: fade-up 0.6s ease both;
@@ -170,10 +168,8 @@ h1 {
   box-shadow: 0 0 12px rgba(30,136,229,0.1);
 }
 
-/* グループブロック */
 .group-block { margin-bottom: 2.8rem; }
 
-/* ── Tool cards ── */
 .tools-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
@@ -194,33 +190,25 @@ h1 {
   overflow: hidden;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  box-shadow:
-    0 4px 16px rgba(0,0,0,0.4),
-    0 1px 0 rgba(255,255,255,0.04) inset;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.04) inset;
   transition: transform 0.28s cubic-bezier(.22,.68,0,1.2), border-color 0.25s ease, box-shadow 0.28s ease;
   animation: fade-up 0.6s ease both;
 }
 .tool-card::before {
   content: ''; position: absolute; inset: 0;
   background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 55%);
-  pointer-events: none;
-  border-radius: 16px;
+  pointer-events: none; border-radius: 16px;
 }
 .tool-card::after {
   content: ''; position: absolute;
   top: 0; left: 0; right: 0; height: 1px;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
-  border-radius: 16px 16px 0 0;
-  pointer-events: none;
+  border-radius: 16px 16px 0 0; pointer-events: none;
 }
-.tool-card:hover {
-  transform: translateY(-6px) scale(1.01);
-  border-color: rgba(144,202,249,0.45);
-}
+.tool-card:hover { transform: translateY(-6px) scale(1.01); border-color: rgba(144,202,249,0.45); }
 .tool-card .accent-line {
   position: absolute; top: 0; left: 1rem; right: 1rem;
-  height: 2px; border-radius: 0 0 3px 3px;
-  filter: blur(0.5px);
+  height: 2px; border-radius: 0 0 3px 3px; filter: blur(0.5px);
 }
 .card-index {
   position: absolute; top: 0.65rem; right: 0.75rem;
@@ -237,108 +225,75 @@ h1 {
   letter-spacing: 0.08em; color: var(--muted);
   margin-bottom: 0.2rem; text-transform: uppercase;
 }
-.card-title {
-  font-size: 13px; font-weight: 700; color: var(--white);
-  margin-bottom: 0.3rem; line-height: 1.35;
-}
-.card-desc {
-  font-size: 11px; color: var(--muted); line-height: 1.6;
-}
-.card-badges {
-  display: flex; flex-wrap: wrap; gap: 4px; margin-top: auto;
-}
+.card-title { font-size: 13px; font-weight: 700; color: var(--white); margin-bottom: 0.3rem; line-height: 1.35; }
+.card-desc  { font-size: 11px; color: var(--muted); line-height: 1.6; }
+.card-badges { display: flex; flex-wrap: wrap; gap: 4px; margin-top: auto; }
 .badge {
   font-family: 'DM Mono', monospace; font-size: 9px;
-  padding: 2px 7px; border-radius: 100px;
-  border: 1px solid; white-space: nowrap;
+  padding: 2px 7px; border-radius: 100px; border: 1px solid; white-space: nowrap;
 }
 .card-arrow {
   position: absolute; bottom: 0.75rem; right: 0.75rem;
   width: 22px; height: 22px; border-radius: 50%;
-  background: rgba(144,202,249,0.08);
-  border: 1px solid rgba(144,202,249,0.2);
+  background: rgba(144,202,249,0.08); border: 1px solid rgba(144,202,249,0.2);
   display: flex; align-items: center; justify-content: center;
   transition: background 0.2s, transform 0.25s cubic-bezier(.22,.68,0,1.2), box-shadow 0.2s;
 }
-.tool-card:hover .card-arrow {
-  background: rgba(144,202,249,0.2);
-  transform: translate(2px, -2px);
-  box-shadow: 0 4px 12px rgba(66,165,245,0.3);
-}
-.card-arrow svg {
-  width: 10px; height: 10px;
-  stroke: var(--spray); fill: none; stroke-width: 2;
-}
+.tool-card:hover .card-arrow { background: rgba(144,202,249,0.2); transform: translate(2px,-2px); box-shadow: 0 4px 12px rgba(66,165,245,0.3); }
+.card-arrow svg { width: 10px; height: 10px; stroke: var(--spray); fill: none; stroke-width: 2; }
 
-/* ── Themes ── */
-.theme-blue .accent-line { background: linear-gradient(90deg, var(--foam), var(--spray)); box-shadow: 0 0 8px rgba(66,165,245,0.6); }
-.theme-blue .card-icon { background: rgba(30,136,229,0.15); border: 1px solid rgba(30,136,229,0.3); }
-.theme-blue .badge { background: rgba(30,136,229,0.1); border-color: rgba(30,136,229,0.3); color: var(--spray); }
-.theme-blue:hover {
-  box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 24px rgba(30,136,229,0.2), 0 0 0 1px rgba(66,165,245,0.25);
-}
+/* Themes */
+.theme-blue   .accent-line { background: linear-gradient(90deg, var(--foam), var(--spray)); box-shadow: 0 0 8px rgba(66,165,245,0.6); }
+.theme-blue   .card-icon   { background: rgba(30,136,229,0.15); border: 1px solid rgba(30,136,229,0.3); }
+.theme-blue   .badge       { background: rgba(30,136,229,0.1); border-color: rgba(30,136,229,0.3); color: var(--spray); }
+.theme-blue:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 24px rgba(30,136,229,0.2), 0 0 0 1px rgba(66,165,245,0.25); }
 
-.theme-teal .accent-line { background: linear-gradient(90deg, var(--teal), var(--green)); box-shadow: 0 0 8px rgba(0,172,193,0.6); }
-.theme-teal .card-icon { background: rgba(0,172,193,0.12); border: 1px solid rgba(0,172,193,0.3); }
-.theme-teal .badge { background: rgba(0,172,193,0.1); border-color: rgba(0,172,193,0.3); color: var(--teal); }
-.theme-teal:hover {
-  box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 24px rgba(0,172,193,0.2), 0 0 0 1px rgba(0,172,193,0.3);
-}
+.theme-teal   .accent-line { background: linear-gradient(90deg, var(--teal), var(--green)); box-shadow: 0 0 8px rgba(0,172,193,0.6); }
+.theme-teal   .card-icon   { background: rgba(0,172,193,0.12); border: 1px solid rgba(0,172,193,0.3); }
+.theme-teal   .badge       { background: rgba(0,172,193,0.1); border-color: rgba(0,172,193,0.3); color: var(--teal); }
+.theme-teal:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 24px rgba(0,172,193,0.2), 0 0 0 1px rgba(0,172,193,0.3); }
 
-.theme-gold .accent-line { background: linear-gradient(90deg, var(--amber), var(--gold)); box-shadow: 0 0 8px rgba(255,179,0,0.5); }
-.theme-gold .card-icon { background: rgba(255,179,0,0.1); border: 1px solid rgba(255,179,0,0.3); }
-.theme-gold .badge { background: rgba(255,179,0,0.08); border-color: rgba(255,179,0,0.3); color: var(--gold); }
-.theme-gold:hover {
-  box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 24px rgba(255,179,0,0.18), 0 0 0 1px rgba(255,213,79,0.3);
-}
+.theme-gold   .accent-line { background: linear-gradient(90deg, var(--amber), var(--gold)); box-shadow: 0 0 8px rgba(255,179,0,0.5); }
+.theme-gold   .card-icon   { background: rgba(255,179,0,0.1); border: 1px solid rgba(255,179,0,0.3); }
+.theme-gold   .badge       { background: rgba(255,179,0,0.08); border-color: rgba(255,179,0,0.3); color: var(--gold); }
+.theme-gold:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 24px rgba(255,179,0,0.18), 0 0 0 1px rgba(255,213,79,0.3); }
 
-.theme-speed .accent-line { background: linear-gradient(90deg, #ff6b00, #ff9800); box-shadow: 0 0 8px rgba(255,107,0,0.55); }
-.theme-speed .card-icon { background: rgba(255,107,0,0.13); border: 1px solid rgba(255,107,0,0.38); }
-.theme-speed .badge { background: rgba(255,107,0,0.08); border-color: rgba(255,107,0,0.3); color: #ff9800; }
-.theme-speed:hover {
-  box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 24px rgba(255,107,0,0.2), 0 0 0 1px rgba(255,152,0,0.3);
-}
+.theme-speed  .accent-line { background: linear-gradient(90deg, #ff6b00, #ff9800); box-shadow: 0 0 8px rgba(255,107,0,0.55); }
+.theme-speed  .card-icon   { background: rgba(255,107,0,0.13); border: 1px solid rgba(255,107,0,0.38); }
+.theme-speed  .badge       { background: rgba(255,107,0,0.08); border-color: rgba(255,107,0,0.3); color: #ff9800; }
+.theme-speed:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 24px rgba(255,107,0,0.2), 0 0 0 1px rgba(255,152,0,0.3); }
 
 .theme-purple .accent-line { background: linear-gradient(90deg, #9c27b0, #ce93d8); box-shadow: 0 0 8px rgba(156,39,176,0.55); }
-.theme-purple .card-icon { background: rgba(156,39,176,0.13); border: 1px solid rgba(179,136,255,0.35); }
-.theme-purple .badge { background: rgba(156,39,176,0.1); border-color: rgba(179,136,255,0.35); color: #ce93d8; }
-.theme-purple:hover {
-  box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 24px rgba(156,39,176,0.22), 0 0 0 1px rgba(206,147,216,0.3);
-}
+.theme-purple .card-icon   { background: rgba(156,39,176,0.13); border: 1px solid rgba(179,136,255,0.35); }
+.theme-purple .badge       { background: rgba(156,39,176,0.1); border-color: rgba(179,136,255,0.35); color: #ce93d8; }
+.theme-purple:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 24px rgba(156,39,176,0.22), 0 0 0 1px rgba(206,147,216,0.3); }
 
-.theme-green .accent-line { background: linear-gradient(90deg, #00897b, #4db6ac); box-shadow: 0 0 8px rgba(0,137,123,0.55); }
-.theme-green .card-icon { background: rgba(0,137,123,0.13); border: 1px solid rgba(77,182,172,0.35); }
-.theme-green .badge { background: rgba(0,137,123,0.1); border-color: rgba(77,182,172,0.35); color: #4db6ac; }
-.theme-green:hover {
-  box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 24px rgba(0,137,123,0.2), 0 0 0 1px rgba(77,182,172,0.3);
-}
+.theme-green  .accent-line { background: linear-gradient(90deg, #00897b, #4db6ac); box-shadow: 0 0 8px rgba(0,137,123,0.55); }
+.theme-green  .card-icon   { background: rgba(0,137,123,0.13); border: 1px solid rgba(77,182,172,0.35); }
+.theme-green  .badge       { background: rgba(0,137,123,0.1); border-color: rgba(77,182,172,0.35); color: #4db6ac; }
+.theme-green:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 24px rgba(0,137,123,0.2), 0 0 0 1px rgba(77,182,172,0.3); }
 
-/* 旅客船復原性テーマ（ミッドブルー） */
 .theme-midblue .accent-line { background: linear-gradient(90deg, #185fa5, #42a5f5); box-shadow: 0 0 8px rgba(66,165,245,0.5); }
-.theme-midblue .card-icon { background: rgba(24,95,165,0.18); border: 1px solid rgba(66,165,245,0.38); }
-.theme-midblue .badge { background: rgba(24,95,165,0.12); border-color: rgba(66,165,245,0.35); color: #90caf9; }
-.theme-midblue:hover {
-  box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 24px rgba(66,165,245,0.2), 0 0 0 1px rgba(144,202,249,0.3);
-}
+.theme-midblue .card-icon   { background: rgba(24,95,165,0.18); border: 1px solid rgba(66,165,245,0.38); }
+.theme-midblue .badge       { background: rgba(24,95,165,0.12); border-color: rgba(66,165,245,0.35); color: #90caf9; }
+.theme-midblue:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 24px rgba(66,165,245,0.2), 0 0 0 1px rgba(144,202,249,0.3); }
 
-/* Coming soon */
-.tool-card.coming-soon {
-  opacity: 0.45; cursor: default; pointer-events: none;
-}
+/* 低水温テーマ（アイスブルー） */
+.theme-ice .accent-line { background: linear-gradient(90deg, #0288d1, #80deea); box-shadow: 0 0 8px rgba(2,136,209,0.65); }
+.theme-ice .card-icon   { background: rgba(2,136,209,0.15); border: 1px solid rgba(128,222,234,0.38); }
+.theme-ice .badge       { background: rgba(2,136,209,0.1); border-color: rgba(128,222,234,0.38); color: #80deea; }
+.theme-ice:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 28px rgba(2,136,209,0.28), 0 0 0 1px rgba(128,222,234,0.38); }
+
+.tool-card.coming-soon { opacity: 0.45; cursor: default; pointer-events: none; }
 .tool-card.coming-soon:hover { transform: none; }
 .coming-badge {
-  font-family: 'DM Mono', monospace; font-size: 9px;
-  padding: 2px 7px; border-radius: 100px;
-  background: rgba(144,202,249,0.08);
-  border: 1px solid rgba(144,202,249,0.2);
-  color: var(--muted);
+  font-family: 'DM Mono', monospace; font-size: 9px; padding: 2px 7px; border-radius: 100px;
+  background: rgba(144,202,249,0.08); border: 1px solid rgba(144,202,249,0.2); color: var(--muted);
 }
 
-/* ── PWA banner ── */
 .pwa-banner {
   background: linear-gradient(135deg, rgba(13,53,97,0.7) 0%, rgba(7,24,41,0.8) 100%);
-  border: 1px solid rgba(144,202,249,0.18);
-  border-radius: 16px; padding: 1rem 1.2rem; margin-bottom: 2.5rem;
+  border: 1px solid rgba(144,202,249,0.18); border-radius: 16px; padding: 1rem 1.2rem; margin-bottom: 2.5rem;
   display: flex; align-items: center; gap: 12px;
   backdrop-filter: blur(12px); animation: fade-up 0.6s ease both;
   box-shadow: 0 4px 24px rgba(0,0,0,0.35), 0 1px 0 rgba(255,255,255,0.04) inset;
@@ -347,57 +302,34 @@ h1 {
 .pwa-text { font-size: 12px; color: var(--muted); line-height: 1.6; }
 .pwa-text strong { color: var(--spray); }
 
-/* ── Visit counter ── */
 .visit-counter {
-  display: flex; justify-content: center;
-  gap: 6px; flex-wrap: wrap;
+  display: flex; justify-content: center; gap: 6px; flex-wrap: wrap;
   margin-top: 1rem; margin-bottom: 0.5rem;
   animation: fade-up 0.6s ease both; animation-delay: 0.3s;
 }
 .visit-item {
   display: flex; flex-direction: column; align-items: center; gap: 3px;
   background: linear-gradient(145deg, rgba(13,53,97,0.6), rgba(7,24,41,0.75));
-  border: 1px solid rgba(144,202,249,0.15);
-  border-radius: 12px; padding: 7px 12px; min-width: 68px;
+  border: 1px solid rgba(144,202,249,0.15); border-radius: 12px; padding: 7px 12px; min-width: 68px;
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 16px rgba(0,0,0,0.35), 0 1px 0 rgba(255,255,255,0.04) inset;
   transition: transform 0.2s, box-shadow 0.2s;
 }
-.visit-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.4), 0 0 12px rgba(30,136,229,0.12);
-}
-.visit-label {
-  font-family: 'DM Mono', monospace; font-size: 9px;
-  letter-spacing: 0.1em; color: var(--muted);
-  text-transform: uppercase; white-space: nowrap;
-}
-.visit-value {
-  font-family: 'DM Mono', monospace; font-size: 17px;
-  font-weight: 500; color: var(--spray); line-height: 1;
-  letter-spacing: -0.02em; min-width: 2ch; text-align: center;
-}
+.visit-item:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.4), 0 0 12px rgba(30,136,229,0.12); }
+.visit-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.1em; color: var(--muted); text-transform: uppercase; white-space: nowrap; }
+.visit-value { font-family: 'DM Mono', monospace; font-size: 17px; font-weight: 500; color: var(--spray); line-height: 1; letter-spacing: -0.02em; min-width: 2ch; text-align: center; }
 .visit-value.loading { font-size: 11px; color: var(--muted); opacity: 0.5; }
 
-/* ── Footer ── */
 .footer {
   text-align: center; margin-top: 2rem; padding-top: 2rem;
   border-top: 1px solid var(--border);
-  font-family: 'DM Mono', monospace; font-size: 11px;
-  color: var(--muted); line-height: 2;
+  font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); line-height: 2;
   animation: fade-up 0.6s ease both;
 }
 .footer a { color: var(--spray); text-decoration: none; }
 
-/* ── Animations ── */
-@keyframes fade-down {
-  from { opacity:0; transform:translateY(-20px); }
-  to   { opacity:1; transform:translateY(0); }
-}
-@keyframes fade-up {
-  from { opacity:0; transform:translateY(16px); }
-  to   { opacity:1; transform:translateY(0); }
-}
+@keyframes fade-down { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fade-up   { from { opacity:0; transform:translateY(16px);  } to { opacity:1; transform:translateY(0); } }
 .tool-card:nth-child(1) { animation-delay: 0.05s; }
 .tool-card:nth-child(2) { animation-delay: 0.12s; }
 .tool-card:nth-child(3) { animation-delay: 0.19s; }
@@ -413,101 +345,35 @@ h1 {
   .visit-value { font-size: 15px; }
 }
 
-/* ══════════════════════════════════════
-   SANDBOX LAYER
-══════════════════════════════════════ */
+/* SANDBOX */
 #sandbox-layer {
-  display: none;
-  position: fixed; inset: 0; z-index: 1000;
-  flex-direction: column;
-  background: #040d18;
+  display: none; position: fixed; inset: 0; z-index: 1000;
+  flex-direction: column; background: #040d18;
+  opacity: 0; transform: scale(1.015);
+  transition: opacity .22s ease, transform .22s ease; pointer-events: none;
 }
-#sandbox-layer.active { display: flex; }
-
-/* Top bar */
+#sandbox-layer.active { display: flex; opacity: 1; transform: scale(1); pointer-events: all; }
 #sandbox-bar {
   height: 48px;
   background: linear-gradient(90deg, #040d18 0%, #071829 60%, #0a2540 100%);
   border-bottom: 1px solid rgba(144,202,249,0.15);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 0 16px;
-  flex-shrink: 0;
-  z-index: 1001;
+  display: flex; align-items: center; gap: 12px; padding: 0 16px; flex-shrink: 0; z-index: 1001;
 }
 #sandbox-back {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  height: 34px;
-  padding: 0 14px;
-  border: 1px solid rgba(144,202,249,0.25);
-  border-radius: 100px;
-  background: rgba(13,53,97,0.6);
-  color: var(--spray);
-  font-family: 'DM Mono', monospace;
-  font-size: 12px;
-  cursor: pointer;
-  transition: background .18s, border-color .18s, transform .12s;
-  white-space: nowrap;
-  flex-shrink: 0;
+  display: flex; align-items: center; gap: 7px; height: 34px; padding: 0 14px;
+  border: 1px solid rgba(144,202,249,0.25); border-radius: 100px;
+  background: rgba(13,53,97,0.6); color: var(--spray);
+  font-family: 'DM Mono', monospace; font-size: 12px; cursor: pointer;
+  transition: background .18s, border-color .18s, transform .12s; white-space: nowrap; flex-shrink: 0;
 }
-#sandbox-back:hover {
-  background: rgba(30,136,229,0.22);
-  border-color: rgba(144,202,249,0.50);
-}
+#sandbox-back:hover { background: rgba(30,136,229,0.22); border-color: rgba(144,202,249,0.50); }
 #sandbox-back:active { transform: scale(.96); }
 #sandbox-back svg { width:14px; height:14px; stroke:var(--spray); fill:none; stroke-width:2.2; flex-shrink:0; }
-
-.sandbox-sep {
-  width: 1px; height: 22px;
-  background: rgba(144,202,249,0.12);
-  flex-shrink: 0;
-}
-#sandbox-title {
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  color: var(--muted);
-  letter-spacing: .06em;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-#sandbox-esc {
-  margin-left: auto;
-  font-family: 'DM Mono', monospace;
-  font-size: 10px;
-  color: rgba(144,202,249,0.3);
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-@media (max-width: 480px) {
-  #sandbox-esc { display: none; }
-  #sandbox-bar { padding: 0 10px; gap: 8px; }
-}
-
-/* iframe */
-#sandbox-frame {
-  flex: 1;
-  width: 100%;
-  border: none;
-  display: block;
-  background: #040d18;
-}
-
-/* open/close animation */
-#sandbox-layer {
-  opacity: 0;
-  transform: scale(1.015);
-  transition: opacity .22s ease, transform .22s ease;
-  pointer-events: none;
-}
-#sandbox-layer.active {
-  opacity: 1;
-  transform: scale(1);
-  pointer-events: all;
-}
+.sandbox-sep { width: 1px; height: 22px; background: rgba(144,202,249,0.12); flex-shrink: 0; }
+#sandbox-title { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: .06em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#sandbox-esc { margin-left: auto; font-family: 'DM Mono', monospace; font-size: 10px; color: rgba(144,202,249,0.3); white-space: nowrap; flex-shrink: 0; }
+#sandbox-frame { flex: 1; width: 100%; border: none; display: block; background: #040d18; }
+@media (max-width: 480px) { #sandbox-esc { display: none; } #sandbox-bar { padding: 0 10px; gap: 8px; } }
 </style>
 </head>
 <body>
@@ -515,25 +381,18 @@ h1 {
 <div class="bg-canvas"></div>
 <div class="grid-overlay"></div>
 <div class="wave-layer">
-  <div class="wave"></div>
-  <div class="wave"></div>
-  <div class="wave"></div>
+  <div class="wave"></div><div class="wave"></div><div class="wave"></div>
 </div>
 
 <div class="content">
 
   <header class="header">
     <div class="compass-icon">
-      <div class="compass-ring">
-        <div class="compass-needle"></div>
-      </div>
+      <div class="compass-ring"><div class="compass-needle"></div></div>
     </div>
     <div class="eyebrow">Maritime Tools by itoshiaki2008-coder</div>
     <h1>小型船舶<br>検査シミュレーター</h1>
-    <p class="subtitle">
-      日本小型船舶検査機構の検査細則に基づく<br>
-      実用シミュレーターツール集
-    </p>
+    <p class="subtitle">日本小型船舶検査機構の検査細則に基づく<br>実用シミュレーターツール集</p>
   </header>
 
   <div class="pwa-banner">
@@ -544,45 +403,33 @@ h1 {
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════
-       GROUP A — 速力・出力・航行区域
-  ══════════════════════════════════════ -->
+  <!-- GROUP A -->
   <div class="group-block">
-    <div class="section-label" style="animation-delay:0.05s">
-      <span>A — 速力 · 出力 · 航行区域</span>
-    </div>
+    <div class="section-label" style="animation-delay:0.05s"><span>A — 速力 · 出力 · 航行区域</span></div>
     <div class="tools-grid">
 
-      <!-- A-01 主機適正出力 -->
       <div class="tool-card theme-blue" data-tool-url="https://itoshiaki2008-coder.github.io/boat-simulator/">
-        <div class="accent-line"></div>
-        <div class="card-index">A-01</div>
+        <div class="accent-line"></div><div class="card-index">A-01</div>
         <div class="card-icon">⚙️</div>
         <div class="card-body">
           <div class="card-tag">附属書 [12]</div>
           <div class="card-title">主機適正出力<br>シミュレーター</div>
           <div class="card-desc">船型・Fa・基準値を自動算定。オーバーパワー判定・許容範囲チェックまで一括計算。</div>
         </div>
-        <div class="card-badges">
-          <span class="badge">汽船 / 船内外機</span>
-          <span class="badge">船外機</span>
-          <span class="badge">附属書12</span>
-        </div>
+        <div class="card-badges"><span class="badge">汽船 / 船内外機</span><span class="badge">船外機</span><span class="badge">附属書12</span></div>
         <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 13L13 3M13 3H6M13 3V10"/></svg></div>
       </div>
 
-      <!-- A-02 最強速力 -->
       <div class="tool-card theme-speed" data-tool-url="https://itoshiaki2008-coder.github.io/max_speed/">
-        <div class="accent-line"></div>
-        <div class="card-index">A-02</div>
+        <div class="accent-line"></div><div class="card-index">A-02</div>
         <div class="card-icon">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
             <path d="M5.5 17.5 A9 9 0 1 1 18.5 17.5" stroke="#ff9800" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-            <line x1="12" y1="4"  x2="12" y2="5.5" stroke="#ff9800" stroke-width="1.3" stroke-linecap="round"/>
+            <line x1="12" y1="4" x2="12" y2="5.5" stroke="#ff9800" stroke-width="1.3" stroke-linecap="round"/>
             <line x1="18.8" y1="7.2" x2="17.7" y2="8.2" stroke="#ff9800" stroke-width="1.1" stroke-linecap="round" opacity="0.7"/>
-            <line x1="5.2"  y1="7.2" x2="6.3"  y2="8.2" stroke="#ff9800" stroke-width="1.1" stroke-linecap="round" opacity="0.7"/>
-            <line x1="21"   y1="13"  x2="19.5" y2="13"  stroke="#ff9800" stroke-width="1.1" stroke-linecap="round" opacity="0.5"/>
-            <line x1="3"    y1="13"  x2="4.5"  y2="13"  stroke="#ff9800" stroke-width="1.1" stroke-linecap="round" opacity="0.5"/>
+            <line x1="5.2" y1="7.2" x2="6.3" y2="8.2" stroke="#ff9800" stroke-width="1.1" stroke-linecap="round" opacity="0.7"/>
+            <line x1="21" y1="13" x2="19.5" y2="13" stroke="#ff9800" stroke-width="1.1" stroke-linecap="round" opacity="0.5"/>
+            <line x1="3" y1="13" x2="4.5" y2="13" stroke="#ff9800" stroke-width="1.1" stroke-linecap="round" opacity="0.5"/>
             <line x1="12" y1="12" x2="17.2" y2="6.8" stroke="#ff5500" stroke-width="1.8" stroke-linecap="round"/>
             <circle cx="12" cy="12" r="1.8" fill="#ff6b00"/>
           </svg>
@@ -592,17 +439,12 @@ h1 {
           <div class="card-title">最強速力<br>シミュレーター</div>
           <div class="card-desc">船体情報とエンジン情報を入力してVを算出します。</div>
         </div>
-        <div class="card-badges">
-          <span class="badge">KW・PS選択可</span>
-          <span class="badge">満載排水量 Δ 自動計算</span>
-        </div>
+        <div class="card-badges"><span class="badge">KW・PS選択可</span><span class="badge">満載排水量 Δ 自動計算</span></div>
         <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 13L13 3M13 3H6M13 3V10"/></svg></div>
       </div>
 
-      <!-- A-03 航行区域シミュレーター -->
       <div class="tool-card theme-teal" data-tool-url="https://itoshiaki2008-coder.github.io/article7_simulator/">
-        <div class="accent-line"></div>
-        <div class="card-index">A-03</div>
+        <div class="accent-line"></div><div class="card-index">A-03</div>
         <div class="card-icon">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
             <rect x="2" y="3" width="20" height="15" rx="1.5" stroke="#00acc1" stroke-width="1.4" fill="none" opacity="0.85"/>
@@ -618,29 +460,19 @@ h1 {
           <div class="card-title">航行区域<br>シミュレーター</div>
           <div class="card-desc">船舶諸元を入力し、全沿海・限定沿海・5海里の適用区域を自動判定します。</div>
         </div>
-        <div class="card-badges">
-          <span class="badge">全沿海</span>
-          <span class="badge">2時間限定沿海</span>
-          <span class="badge">コーミング計算</span>
-        </div>
+        <div class="card-badges"><span class="badge">全沿海</span><span class="badge">2時間限定沿海</span><span class="badge">コーミング計算</span></div>
         <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 13L13 3M13 3H6M13 3V10"/></svg></div>
       </div>
 
-      <!-- A-04 高速艇判定シミュレーター -->
       <div class="tool-card theme-speed" data-tool-url="https://itoshiaki2008-coder.github.io/highspeed/">
-        <div class="accent-line"></div>
-        <div class="card-index">A-04</div>
+        <div class="accent-line"></div><div class="card-index">A-04</div>
         <div class="card-icon">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
-            <!-- 艇体シルエット（滑走艇） -->
             <path d="M2 15 Q5 11 10 10 L20 10 L22 12 Q18 14 12 15 Z" fill="none" stroke="#ff9800" stroke-width="1.35" stroke-linejoin="round" opacity="0.9"/>
-            <!-- 船首波 -->
             <path d="M20 12 Q22 10 23 11" fill="none" stroke="#ff9800" stroke-width="1.1" stroke-linecap="round" opacity="0.6"/>
-            <!-- 速度ライン3本 -->
-            <line x1="1"  y1="13" x2="5"  y2="13" stroke="#ff6b00" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
-            <line x1="1"  y1="15.5" x2="4"  y2="15.5" stroke="#ff6b00" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
-            <line x1="1"  y1="18" x2="3"  y2="18" stroke="#ff6b00" stroke-width="0.9" stroke-linecap="round" opacity="0.35"/>
-            <!-- F値ラベル -->
+            <line x1="1" y1="13" x2="5" y2="13" stroke="#ff6b00" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
+            <line x1="1" y1="15.5" x2="4" y2="15.5" stroke="#ff6b00" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+            <line x1="1" y1="18" x2="3" y2="18" stroke="#ff6b00" stroke-width="0.9" stroke-linecap="round" opacity="0.35"/>
             <rect x="12" y="5" width="9" height="4.5" rx="1" fill="rgba(255,107,0,0.18)" stroke="#ff9800" stroke-width="0.8"/>
             <text x="16.5" y="8.4" font-family="monospace" font-size="3.8" fill="#ffa726" text-anchor="middle">F≧60</text>
           </svg>
@@ -650,48 +482,32 @@ h1 {
           <div class="card-title">高速艇判定<br>シミュレーター</div>
           <div class="card-desc">F = W(PS)/Δk を算定し高速艇該当を判定。リーニングシートの座席扱い可否も確認できます。</div>
         </div>
-        <div class="card-badges">
-          <span class="badge">F 値算定</span>
-          <span class="badge">0.5LBd 推定</span>
-          <span class="badge">リーニングシート</span>
-        </div>
+        <div class="card-badges"><span class="badge">F 値算定</span><span class="badge">0.5LBd 推定</span><span class="badge">リーニングシート</span></div>
         <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 13L13 3M13 3H6M13 3V10"/></svg></div>
       </div>
 
     </div>
   </div><!-- /group A -->
 
-  <!-- ══════════════════════════════════════
-       GROUP B — 復原性・定員
-  ══════════════════════════════════════ -->
+  <!-- GROUP B -->
   <div class="group-block">
-    <div class="section-label" style="animation-delay:0.1s">
-      <span>B — 復原性 · 定員</span>
-    </div>
+    <div class="section-label" style="animation-delay:0.1s"><span>B — 復原性 · 定員</span></div>
     <div class="tools-grid">
 
-      <!-- B-01 最大搭載人員（第102条・第103条） -->
       <div class="tool-card theme-teal" data-tool-url="https://itoshiaki2008-coder.github.io/stability_simulator/">
-        <div class="accent-line"></div>
-        <div class="card-index">B-01</div>
+        <div class="accent-line"></div><div class="card-index">B-01</div>
         <div class="card-icon">⚓</div>
         <div class="card-body">
           <div class="card-tag">第102条・第103条 ／ 附属書[2-7]</div>
           <div class="card-title">最大搭載人員<br>算定シミュレーター</div>
           <div class="card-desc">復原性基準に基づく定員算定。沿海・平水区域対応、客席床低船（附属書[2-7]）にも対応。</div>
         </div>
-        <div class="card-badges">
-          <span class="badge">沿海区域</span>
-          <span class="badge">平水区域</span>
-          <span class="badge">附属書2-7</span>
-        </div>
+        <div class="card-badges"><span class="badge">沿海区域</span><span class="badge">平水区域</span><span class="badge">附属書2-7</span></div>
         <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 13L13 3M13 3H6M13 3V10"/></svg></div>
       </div>
 
-      <!-- B-02 ミニボート復原性（附属書[2-6]） -->
       <div class="tool-card theme-green" data-tool-url="https://itoshiaki2008-coder.github.io/appendix2_6_simulator/">
-        <div class="accent-line"></div>
-        <div class="card-index">B-02</div>
+        <div class="accent-line"></div><div class="card-index">B-02</div>
         <div class="card-icon">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
             <path d="M3 16 Q6 10 12 10 Q18 10 21 16 Z" fill="none" stroke="#4db6ac" stroke-width="1.4" stroke-linejoin="round"/>
@@ -700,7 +516,7 @@ h1 {
             <path d="M1 17.5 Q4 16.5 7 17.5 Q10 18.5 13 17.5 Q16 16.5 19 17.5 Q21.5 18.2 23 17.5" fill="none" stroke="#00897b" stroke-width="1.1" stroke-linecap="round" opacity="0.7"/>
             <line x1="20.5" y1="10.5" x2="20.5" y2="17" stroke="#4db6ac" stroke-width="1" stroke-dasharray="2,1.5" opacity="0.6"/>
             <line x1="19.5" y1="10.5" x2="21.5" y2="10.5" stroke="#4db6ac" stroke-width="1" opacity="0.6"/>
-            <line x1="19.5" y1="17"   x2="21.5" y2="17"   stroke="#4db6ac" stroke-width="1" opacity="0.6"/>
+            <line x1="19.5" y1="17" x2="21.5" y2="17" stroke="#4db6ac" stroke-width="1" opacity="0.6"/>
           </svg>
         </div>
         <div class="card-body">
@@ -708,30 +524,20 @@ h1 {
           <div class="card-title">ミニボート復原性<br>シミュレーター</div>
           <div class="card-desc">L&lt;3.3mの小型船舶の幅・乾舷条件を判定し、最大搭載人員を算定します。</div>
         </div>
-        <div class="card-badges">
-          <span class="badge">L &lt; 3.3m</span>
-          <span class="badge">平水 / 限定沿海</span>
-          <span class="badge">最大搭載人員</span>
-        </div>
+        <div class="card-badges"><span class="badge">L &lt; 3.3m</span><span class="badge">平水 / 限定沿海</span><span class="badge">最大搭載人員</span></div>
         <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 13L13 3M13 3H6M13 3V10"/></svg></div>
       </div>
 
-      <!-- B-03 旅客船復原性（附属書[2-2]） ★NEW -->
       <div class="tool-card theme-midblue" data-tool-url="https://itoshiaki2008-coder.github.io/annex_2_2_stability/">
-        <div class="accent-line"></div>
-        <div class="card-index">B-03</div>
+        <div class="accent-line"></div><div class="card-index">B-03</div>
         <div class="card-icon">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
-            <!-- 船体（2層デッキ） -->
-            <rect x="4"  y="10" width="16" height="5"  rx="0.8" fill="none" stroke="#90caf9" stroke-width="1.3"/>
-            <rect x="6"  y="6"  width="12" height="4"  rx="0.8" fill="none" stroke="#90caf9" stroke-width="1.2" opacity="0.8"/>
-            <rect x="9"  y="3"  width="6"  height="3"  rx="0.6" fill="none" stroke="#90caf9" stroke-width="1.1" opacity="0.55"/>
-            <!-- 船底 -->
+            <rect x="4" y="10" width="16" height="5" rx="0.8" fill="none" stroke="#90caf9" stroke-width="1.3"/>
+            <rect x="6" y="6" width="12" height="4" rx="0.8" fill="none" stroke="#90caf9" stroke-width="1.2" opacity="0.8"/>
+            <rect x="9" y="3" width="6" height="3" rx="0.6" fill="none" stroke="#90caf9" stroke-width="1.1" opacity="0.55"/>
             <path d="M4 15 Q12 19.5 20 15" fill="none" stroke="#42a5f5" stroke-width="1.3" stroke-linecap="round"/>
-            <!-- 傾斜角度ライン -->
             <line x1="12" y1="15" x2="16" y2="10.5" stroke="#42a5f5" stroke-width="1" stroke-dasharray="2,1.5" opacity="0.55"/>
-            <!-- 旅客アイコン（人）2人 -->
-            <circle cx="9"  cy="8" r="0.9" fill="#90caf9" opacity="0.8"/>
+            <circle cx="9" cy="8" r="0.9" fill="#90caf9" opacity="0.8"/>
             <circle cx="15" cy="8" r="0.9" fill="#90caf9" opacity="0.8"/>
           </svg>
         </div>
@@ -740,35 +546,25 @@ h1 {
           <div class="card-title">旅客船復原性<br>シミュレーター</div>
           <div class="card-desc">旅客搭載場所が2層以上、又は主要寸法比が特殊な船舶の復原性を判定し、最大旅客数を探索します。</div>
         </div>
-        <div class="card-badges">
-          <span class="badge">2層以上デッキ</span>
-          <span class="badge">沿海 / 平水区域</span>
-          <span class="badge">傾斜試験対応</span>
-        </div>
+        <div class="card-badges"><span class="badge">2層以上デッキ</span><span class="badge">沿海 / 平水区域</span><span class="badge">傾斜試験対応</span></div>
         <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 13L13 3M13 3H6M13 3V10"/></svg></div>
       </div>
 
     </div>
   </div><!-- /group B -->
 
-  <!-- ══════════════════════════════════════
-       GROUP C — 灯火・形象物・マップ
-  ══════════════════════════════════════ -->
+  <!-- GROUP C — 灯火・形象物・マップ -->
   <div class="group-block">
-    <div class="section-label" style="animation-delay:0.15s">
-      <span>C — 灯火 · 形象物 · マップ</span>
-    </div>
+    <div class="section-label" style="animation-delay:0.15s"><span>C — 灯火 · 形象物 · マップ</span></div>
     <div class="tools-grid">
 
-      <!-- C-01 灯火・形象物シミュレーター -->
       <div class="tool-card theme-purple" data-tool-url="https://itoshiaki2008-coder.github.io/ship_light/">
-        <div class="accent-line"></div>
-        <div class="card-index">C-01</div>
+        <div class="accent-line"></div><div class="card-index">C-01</div>
         <div class="card-icon">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
             <rect x="9.5" y="10" width="5" height="10" rx="1" fill="none" stroke="#b388ff" stroke-width="1.4"/>
             <rect x="8.5" y="7.5" width="7" height="3" rx="1" fill="none" stroke="#b388ff" stroke-width="1.3"/>
-            <line x1="8.5"  y1="9" x2="3"  y2="6" stroke="#b388ff" stroke-width="1.1" stroke-linecap="round" opacity="0.6"/>
+            <line x1="8.5" y1="9" x2="3" y2="6" stroke="#b388ff" stroke-width="1.1" stroke-linecap="round" opacity="0.6"/>
             <line x1="15.5" y1="9" x2="21" y2="6" stroke="#b388ff" stroke-width="1.1" stroke-linecap="round" opacity="0.6"/>
             <line x1="12" y1="7.5" x2="12" y2="3" stroke="#ce93d8" stroke-width="1.3" stroke-linecap="round" opacity="0.8"/>
             <circle cx="12" cy="9" r="1.5" fill="#e040fb" opacity="0.9"/>
@@ -780,66 +576,74 @@ h1 {
           <div class="card-title">灯火・形象物<br>シミュレーター</div>
           <div class="card-desc">航行中・停泊中の表示灯火と形象物を船種・状況別に確認できます。</div>
         </div>
-        <div class="card-badges">
-          <span class="badge">航行灯</span>
-          <span class="badge">形象物</span>
-          <span class="badge">船種別対応</span>
-        </div>
+        <div class="card-badges"><span class="badge">航行灯</span><span class="badge">形象物</span><span class="badge">船種別対応</span></div>
         <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 13L13 3M13 3H6M13 3V10"/></svg></div>
       </div>
 
-      <!-- C-02 航行区域PDFリンク表 -->
       <div class="tool-card theme-gold" data-tool-url="https://itoshiaki2008-coder.github.io/jci_links_final/">
-        <div class="accent-line"></div>
-        <div class="card-index">C-02</div>
+        <div class="accent-line"></div><div class="card-index">C-02</div>
         <div class="card-icon">🗺️</div>
         <div class="card-body">
           <div class="card-tag">限定沿海区域 参考図</div>
           <div class="card-title">航行区域<br>PDFリンク表</div>
           <div class="card-desc">全485区域のPDFへ直接リンク。地方・汽船帆船・航行区域種別でフィルタリング可能。</div>
         </div>
-        <div class="card-badges">
-          <span class="badge">485区域収録</span>
-          <span class="badge">汽船 / 帆船</span>
-          <span class="badge">5〜30kt</span>
-        </div>
+        <div class="card-badges"><span class="badge">485区域収録</span><span class="badge">汽船 / 帆船</span><span class="badge">5〜30kt</span></div>
         <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 13L13 3M13 3H6M13 3V10"/></svg></div>
       </div>
 
-      <!-- C-03 航行区域PDFリンクMAP -->
       <div class="tool-card theme-gold" data-tool-url="https://itoshiaki2008-coder.github.io/maplink/">
-        <div class="accent-line"></div>
-        <div class="card-index">C-03</div>
+        <div class="accent-line"></div><div class="card-index">C-03</div>
         <div class="card-icon">🗺️</div>
         <div class="card-body">
           <div class="card-tag">限定沿海区域 参考図</div>
           <div class="card-title">航行区域<br>PDFリンクMAP</div>
           <div class="card-desc">全485区域のPDFへ直接リンク。地図上でエリアを選んで絞り込めます。</div>
         </div>
-        <div class="card-badges">
-          <span class="badge">485区域収録</span>
-          <span class="badge">汽船 / 帆船</span>
-          <span class="badge">マップ表示</span>
+        <div class="card-badges"><span class="badge">485区域収録</span><span class="badge">汽船 / 帆船</span><span class="badge">マップ表示</span></div>
+        <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 13L13 3M13 3H6M13 3V10"/></svg></div>
+      </div>
+
+      <!-- C-04 低水温海域早見図 ★NEW -->
+      <div class="tool-card theme-ice" data-tool-url="https://www.google.com/maps/d/embed?mid=1WYfuPDnW5An1eBwm2ioTB527lQjjz3I&ehbc=2E312F">
+        <div class="accent-line"></div><div class="card-index">C-04</div>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
+            <!-- 温度計 -->
+            <rect x="10.5" y="3" width="3" height="11" rx="1.5" stroke="#80deea" stroke-width="1.3" fill="none"/>
+            <circle cx="12" cy="16.5" r="3" stroke="#80deea" stroke-width="1.3" fill="none"/>
+            <circle cx="12" cy="16.5" r="1.7" fill="#0288d1" opacity="0.85"/>
+            <line x1="12" y1="14" x2="12" y2="8" stroke="#0288d1" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+            <!-- 目盛り -->
+            <line x1="13.5" y1="7"  x2="16.5" y2="7"  stroke="#80deea" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+            <line x1="13.5" y1="10" x2="17"   y2="10" stroke="#80deea" stroke-width="1" stroke-linecap="round" opacity="0.45"/>
+            <line x1="13.5" y1="13" x2="15.5" y2="13" stroke="#80deea" stroke-width="1" stroke-linecap="round" opacity="0.3"/>
+            <!-- 雪の結晶 -->
+            <line x1="4" y1="5" x2="4" y2="9" stroke="#80deea" stroke-width="1.1" stroke-linecap="round" opacity="0.6"/>
+            <line x1="2" y1="7" x2="6" y2="7" stroke="#80deea" stroke-width="1.1" stroke-linecap="round" opacity="0.6"/>
+            <line x1="2.6" y1="5.6" x2="5.4" y2="8.4" stroke="#80deea" stroke-width="0.8" stroke-linecap="round" opacity="0.4"/>
+            <line x1="5.4" y1="5.6" x2="2.6" y2="8.4" stroke="#80deea" stroke-width="0.8" stroke-linecap="round" opacity="0.4"/>
+          </svg>
         </div>
+        <div class="card-body">
+          <div class="card-tag">附属書[16] ― 低水温水域</div>
+          <div class="card-title">低水温海域<br>早見図</div>
+          <div class="card-desc">救命設備規則心得 附属書[6]の表に基づく低水温水域（10℃・15℃・20℃未満）を地図上で確認できます。</div>
+        </div>
+        <div class="card-badges"><span class="badge">10℃未満</span><span class="badge">15℃未満</span><span class="badge">20℃未満</span></div>
         <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 13L13 3M13 3H6M13 3V10"/></svg></div>
       </div>
 
     </div>
   </div><!-- /group C -->
 
-  <!-- ══════════════════════════════════════
-       GROUP D — 手数料・安全設備
-  ══════════════════════════════════════ -->
+  <!-- GROUP D -->
   <div class="group-block">
-    <div class="section-label" style="animation-delay:0.05s">
-      <span>D — 手数料 · 安全設備</span>
-    </div>
+    <div class="section-label" style="animation-delay:0.05s"><span>D — 手数料 · 安全設備</span></div>
     <div class="tools-grid">
 
-      <!-- D-01 JCI手数料一覧 -->
       <div class="tool-card theme-midblue" data-tool-url="https://itoshiaki2008-coder.github.io/jci_fee_tables">
-        <div class="accent-line"></div>
-        <div class="card-index">D-01</div>
+        <div class="accent-line"></div><div class="card-index">D-01</div>
         <div class="card-icon">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
             <rect x="3" y="3" width="18" height="18" rx="2" stroke="#90caf9" stroke-width="1.4" fill="none"/>
@@ -855,18 +659,12 @@ h1 {
           <div class="card-title">JCI手数料<br>一覧チャート</div>
           <div class="card-desc">登録測度・定期／中間・臨時検査の手数料を船長・トン数別にグラフで確認できます。</div>
         </div>
-        <div class="card-badges">
-          <span class="badge">登録測度</span>
-          <span class="badge">定期 / 中間検査</span>
-          <span class="badge">臨時検査</span>
-        </div>
+        <div class="card-badges"><span class="badge">登録測度</span><span class="badge">定期 / 中間検査</span><span class="badge">臨時検査</span></div>
         <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 13L13 3M13 3H6M13 3V10"/></svg></div>
       </div>
 
-      <!-- D-02 安全設備義務化ベン図 -->
       <div class="tool-card theme-green" data-tool-url="https://itoshiaki2008-coder.github.io/anzenven">
-        <div class="accent-line"></div>
-        <div class="card-index">D-02</div>
+        <div class="accent-line"></div><div class="card-index">D-02</div>
         <div class="card-icon">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
             <circle cx="9"  cy="10" r="6" stroke="#4db6ac" stroke-width="1.3" fill="none" opacity="0.85"/>
@@ -880,42 +678,28 @@ h1 {
           <div class="card-title">安全設備義務化<br>ベン図・適用日</div>
           <div class="card-desc">船種・旅客定員別の安全設備義務化区分（A/B/C）と各設備の適用期日を一覧表示。</div>
         </div>
-        <div class="card-badges">
-          <span class="badge">A / B / C 区分</span>
-          <span class="badge">法定無線 · AIS</span>
-          <span class="badge">隔壁水密化</span>
-        </div>
+        <div class="card-badges"><span class="badge">A / B / C 区分</span><span class="badge">法定無線 · AIS</span><span class="badge">隔壁水密化</span></div>
         <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 13L13 3M13 3H6M13 3V10"/></svg></div>
       </div>
 
     </div>
   </div><!-- /group D -->
 
-  <!-- ══════════════════════════════════════
-       GROUP E — 構造試験
-  ══════════════════════════════════════ -->
+  <!-- GROUP E -->
   <div class="group-block">
-    <div class="section-label" style="animation-delay:0.05s">
-      <span>E — 構造試験</span>
-    </div>
+    <div class="section-label" style="animation-delay:0.05s"><span>E — 構造試験</span></div>
     <div class="tools-grid">
 
-      <!-- E-01 落下試験シミュレーター -->
       <div class="tool-card theme-speed" data-tool-url="https://itoshiaki2008-coder.github.io/droptest/">
-        <div class="accent-line"></div>
-        <div class="card-index">E-01</div>
+        <div class="accent-line"></div><div class="card-index">E-01</div>
         <div class="card-icon">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
-            <!-- 船体シルエット -->
             <path d="M4 14 Q12 18 20 14" fill="none" stroke="#ff9800" stroke-width="1.4" stroke-linecap="round"/>
             <path d="M6 14 L6 11 L18 11 L18 14" fill="none" stroke="#ff9800" stroke-width="1.2" stroke-linejoin="round" opacity="0.85"/>
-            <!-- 落下矢印 -->
             <line x1="12" y1="2" x2="12" y2="9" stroke="#ff6b00" stroke-width="1.6" stroke-linecap="round"/>
             <polyline points="9.5,6.5 12,9.5 14.5,6.5" fill="none" stroke="#ff6b00" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
-            <!-- 水面波線 -->
             <path d="M2 19.5 Q4.5 18 7 19.5 Q9.5 21 12 19.5 Q14.5 18 17 19.5 Q19.5 21 22 19.5" fill="none" stroke="#ff9800" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
-            <!-- 高さ寸法ライン -->
-            <line x1="20.5" y1="9" x2="20.5" y2="14" stroke="#ff9800" stroke-width="0.9" stroke-dasharray="2,1.5" opacity="0.5"/>
+            <line x1="20.5" y1="9"  x2="20.5" y2="14" stroke="#ff9800" stroke-width="0.9" stroke-dasharray="2,1.5" opacity="0.5"/>
             <line x1="19.5" y1="9"  x2="21.5" y2="9"  stroke="#ff9800" stroke-width="0.9" opacity="0.5"/>
             <line x1="19.5" y1="14" x2="21.5" y2="14" stroke="#ff9800" stroke-width="0.9" opacity="0.5"/>
           </svg>
@@ -925,30 +709,21 @@ h1 {
           <div class="card-title">落下試験<br>シミュレーター</div>
           <div class="card-desc">船体種別・船長・排水量・機関出力を入力し、落下高さ H を自動算出します。</div>
         </div>
-        <div class="card-badges">
-          <span class="badge">鋼製 / FRP / 軽合金</span>
-          <span class="badge">PE・PP / ABS</span>
-          <span class="badge">長さ 12m 未満</span>
-        </div>
+        <div class="card-badges"><span class="badge">鋼製 / FRP / 軽合金</span><span class="badge">PE・PP / ABS</span><span class="badge">長さ 12m 未満</span></div>
         <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 13L13 3M13 3H6M13 3V10"/></svg></div>
       </div>
 
-      <!-- E-02 FRP船体強度確認シミュレーター -->
       <div class="tool-card theme-teal" data-tool-url="https://itoshiaki2008-coder.github.io/frp_strength/">
-        <div class="accent-line"></div>
-        <div class="card-index">E-02</div>
+        <div class="accent-line"></div><div class="card-index">E-02</div>
         <div class="card-icon">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
-            <!-- 断面図：甲板・船側・船底 -->
             <rect x="4" y="6" width="16" height="2" rx="0.6" fill="none" stroke="#00acc1" stroke-width="1.3"/>
             <line x1="4"  y1="8"  x2="4"  y2="17" stroke="#00acc1" stroke-width="1.3" stroke-linecap="round"/>
             <line x1="20" y1="8"  x2="20" y2="17" stroke="#00acc1" stroke-width="1.3" stroke-linecap="round"/>
             <path d="M4 17 Q12 21 20 17" fill="none" stroke="#26a69a" stroke-width="1.4" stroke-linecap="round"/>
-            <!-- 板厚ノギス矢印 -->
-            <line x1="4" y1="4" x2="20" y2="4" stroke="#00acc1" stroke-width="0.9" stroke-dasharray="2,1.5" opacity="0.55"/>
+            <line x1="4"  y1="4"  x2="20" y2="4"  stroke="#00acc1" stroke-width="0.9" stroke-dasharray="2,1.5" opacity="0.55"/>
             <line x1="4"  y1="3.2" x2="4"  y2="4.8" stroke="#00acc1" stroke-width="1" opacity="0.7"/>
             <line x1="20" y1="3.2" x2="20" y2="4.8" stroke="#00acc1" stroke-width="1" opacity="0.7"/>
-            <!-- チェックマーク -->
             <polyline points="9,13 11,15.2 15.5,10.5" stroke="#4db6ac" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
@@ -957,56 +732,31 @@ h1 {
           <div class="card-title">FRP船体強度確認<br>シミュレーター</div>
           <div class="card-desc">板厚計測値と引張り強さから 75·a·W·L ≦ D×10³ を検証。強度適合判定と余裕率を算出します。</div>
         </div>
-        <div class="card-badges">
-          <span class="badge">15 m 未満</span>
-          <span class="badge">滑走 / 非滑走艇</span>
-          <span class="badge">σ条件チェック</span>
-        </div>
+        <div class="card-badges"><span class="badge">15 m 未満</span><span class="badge">滑走 / 非滑走艇</span><span class="badge">σ条件チェック</span></div>
         <div class="card-arrow"><svg viewBox="0 0 16 16"><path d="M3 13L13 3M13 3H6M13 3V10"/></svg></div>
       </div>
 
     </div>
   </div><!-- /group E -->
 
-  <!-- ── Footer ── -->
   <footer class="footer">
     <div>Small Craft Inspection Tools</div>
-
     <div class="visit-counter" id="visitCounter">
-      <div class="visit-item">
-        <span class="visit-label">本日</span>
-        <span class="visit-value loading" id="vc-day">…</span>
-      </div>
-      <div class="visit-item">
-        <span class="visit-label">直近1週間</span>
-        <span class="visit-value loading" id="vc-week">…</span>
-      </div>
-      <div class="visit-item">
-        <span class="visit-label">直近1ヶ月</span>
-        <span class="visit-value loading" id="vc-month">…</span>
-      </div>
-      <div class="visit-item">
-        <span class="visit-label">直近1年</span>
-        <span class="visit-value loading" id="vc-year">…</span>
-      </div>
+      <div class="visit-item"><span class="visit-label">本日</span><span class="visit-value loading" id="vc-day">…</span></div>
+      <div class="visit-item"><span class="visit-label">直近1週間</span><span class="visit-value loading" id="vc-week">…</span></div>
+      <div class="visit-item"><span class="visit-label">直近1ヶ月</span><span class="visit-value loading" id="vc-month">…</span></div>
+      <div class="visit-item"><span class="visit-label">直近1年</span><span class="visit-value loading" id="vc-year">…</span></div>
     </div>
-
     <div>日本小型船舶検査機構 検査細則に基づく参考計算ツール</div>
     <div style="margin-top:0.5rem">
-      <a href="https://jci.go.jp" target="_blank">jci.go.jp</a>
-      &nbsp;／&nbsp;
+      <a href="https://jci.go.jp" target="_blank">jci.go.jp</a> &nbsp;／&nbsp;
       <a href="https://github.com/itoshiaki2008-coder" target="_blank">GitHub</a>
     </div>
-    <div style="margin-top:0.5rem;font-size:10px;opacity:0.5">
-      本ツール群は参考計算です。最終判断は必ずJCIにご確認ください。
-    </div>
+    <div style="margin-top:0.5rem;font-size:10px;opacity:0.5">本ツール群は参考計算です。最終判断は必ずJCIにご確認ください。</div>
   </footer>
 
 </div><!-- /content -->
 
-<!-- ══════════════════════════════════════
-     SANDBOX LAYER
-══════════════════════════════════════ -->
 <div id="sandbox-layer" role="dialog" aria-modal="true" aria-label="ツール表示エリア">
   <div id="sandbox-bar">
     <button id="sandbox-back" onclick="closeSandbox()">
@@ -1017,19 +767,12 @@ h1 {
     <span id="sandbox-title"></span>
     <span id="sandbox-esc">ESC で戻る</span>
   </div>
-  <iframe
-    id="sandbox-frame"
-    src="about:blank"
+  <iframe id="sandbox-frame" src="about:blank"
     sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals"
-    title="ツール表示エリア"
-    loading="lazy"
-  ></iframe>
+    title="ツール表示エリア" loading="lazy"></iframe>
 </div>
 
 <script>
-// ============================================================
-// Sandbox — iframe launcher
-// ============================================================
 const sandboxLayer = document.getElementById('sandbox-layer');
 const sandboxFrame = document.getElementById('sandbox-frame');
 const sandboxTitle = document.getElementById('sandbox-title');
@@ -1038,18 +781,13 @@ function openSandbox(url, name) {
   sandboxFrame.src = url;
   sandboxTitle.textContent = name || url;
   sandboxLayer.style.display = 'flex';
-  // trigger transition next frame
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => sandboxLayer.classList.add('active'));
-  });
+  requestAnimationFrame(() => requestAnimationFrame(() => sandboxLayer.classList.add('active')));
   document.body.style.overflow = 'hidden';
   history.pushState({ sandbox: true, url, name }, '', '');
 }
-
 function closeSandbox() {
   sandboxLayer.classList.remove('active');
   document.body.style.overflow = '';
-  // wait for fade-out then hide & clear src
   sandboxLayer.addEventListener('transitionend', function handler() {
     sandboxLayer.style.display = 'none';
     sandboxFrame.src = 'about:blank';
@@ -1057,7 +795,6 @@ function closeSandbox() {
   }, { once: true });
 }
 
-// card click delegation
 document.querySelectorAll('.tool-card[data-tool-url]').forEach(card => {
   card.style.cursor = 'pointer';
   card.addEventListener('click', () => {
@@ -1067,49 +804,22 @@ document.querySelectorAll('.tool-card[data-tool-url]').forEach(card => {
   });
 });
 
-// ESC key
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && sandboxLayer.classList.contains('active')) closeSandbox();
-});
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && sandboxLayer.classList.contains('active')) closeSandbox(); });
+window.addEventListener('popstate', () => { if (sandboxLayer.classList.contains('active')) closeSandbox(); });
 
-// browser back button
-window.addEventListener('popstate', e => {
-  if (sandboxLayer.classList.contains('active')) closeSandbox();
-});
-
-// ============================================================
-// 訪問カウンター — GAS連携
-// ============================================================
+// 訪問カウンター
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbxHpKyhVxGJ0nELmMglo6qQ0udKxGcSRedxy_d9kfEUqv1RiEqOp2xpXvVmWdY0Pxlxlw/exec';
-
 (async function () {
-  const ids = { day: 'vc-day', week: 'vc-week', month: 'vc-month', year: 'vc-year' };
-  function set(key, val) {
-    const el = document.getElementById(ids[key]);
-    if (!el) return;
-    el.textContent = val.toLocaleString();
-    el.classList.remove('loading');
-  }
-  function setError() {
-    Object.values(ids).forEach(id => {
-      const el = document.getElementById(id);
-      if (el) { el.textContent = '-'; el.classList.remove('loading'); }
-    });
-  }
+  const ids = { day:'vc-day', week:'vc-week', month:'vc-month', year:'vc-year' };
+  function set(key, val) { const el = document.getElementById(ids[key]); if (!el) return; el.textContent = val.toLocaleString(); el.classList.remove('loading'); }
+  function setError() { Object.values(ids).forEach(id => { const el = document.getElementById(id); if (el) { el.textContent = '-'; el.classList.remove('loading'); } }); }
   try {
     const res = await fetch(GAS_URL, { method: 'GET' });
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
-    set('day',   data.day   ?? 0);
-    set('week',  data.week  ?? 0);
-    set('month', data.month ?? 0);
-    set('year',  data.year  ?? 0);
-  } catch (e) {
-    console.warn('visit counter error:', e);
-    setError();
-  }
+    set('day', data.day ?? 0); set('week', data.week ?? 0); set('month', data.month ?? 0); set('year', data.year ?? 0);
+  } catch (e) { console.warn('visit counter error:', e); setError(); }
 })();
 </script>
-
 </body>
 </html>
