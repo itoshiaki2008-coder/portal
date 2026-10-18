@@ -1004,10 +1004,15 @@ document.querySelectorAll('.tool-card[data-tool-url]').forEach(card => {
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && sandboxLayer.classList.contains('active')) closeSandbox(); });
 window.addEventListener('popstate', () => { if (sandboxLayer.classList.contains('active')) closeSandbox(); });
 
-// ============ 夜空の演出：流れ星 ＆ 灯台の閃光 ============
+// ============ 夜空の演出：流れ星 ＆ 灯台の閃光 ＆ 季節エフェクト ============
 (function () {
-  // URLに ?fx=1 を付けると「動きを減らす」設定を無視して演出を表示する
-  const forceFx = new URLSearchParams(location.search).get('fx') === '1';
+  // ?fx=1 : 「動きを減らす」設定を無視して従来の演出（流れ星＋灯台）を表示
+  // ?fx=2 : 同上＋流れ星の代わりに季節エフェクト（雪 / 桜 / かもめ / 落葉）
+  //         確認用に ?fx=2&season=snow|sakura|gull|leaf で季節を強制できる
+  const params  = new URLSearchParams(location.search);
+  const fxParam = params.get('fx');
+  const seasonal = fxParam === '2';
+  const forceFx  = fxParam === '1' || seasonal;
   if (forceFx) document.documentElement.classList.add('fx-force');
   const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduced && !forceFx) return;
@@ -1015,6 +1020,7 @@ window.addEventListener('popstate', () => { if (sandboxLayer.classList.contains(
   const sky = document.getElementById('skyFx');
   const lh  = document.getElementById('lhFx');
   const rand = (a, b) => a + Math.random() * (b - a);
+  const pick = arr => arr[Math.floor(Math.random() * arr.length)];
 
   // ツール表示中・タブ非表示中は演出しない
   function idle() {
@@ -1054,14 +1060,147 @@ window.addEventListener('popstate', () => { if (sandboxLayer.classList.contains(
     lh.classList.add('flash');
   }
 
+  // ---------- 季節エフェクト（?fx=2） ----------
+  function startSeasonal() {
+    const month = new Date().getMonth() + 1;
+    let season = month >= 3 && month <= 5 ? 'sakura'
+               : month >= 6 && month <= 8 ? 'gull'
+               : month >= 9 && month <= 11 ? 'leaf'
+               : 'snow';
+    const forced = params.get('season');
+    if (['snow', 'sakura', 'gull', 'leaf'].includes(forced)) season = forced;
+
+    const cv = document.createElement('canvas');
+    cv.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;';
+    sky.appendChild(cv);
+    const ctx = cv.getContext('2d');
+    let W = 0, H = 0;
+    function resize() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = window.innerWidth; H = window.innerHeight;
+      cv.width = W * dpr; cv.height = H * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    const make = {
+      snow: first => ({ x: rand(0, W), y: first ? rand(0, H) : -10, r: rand(1.5, 4.5),
+                        vy: rand(0.4, 1.2), ph: rand(0, 6.28), sw: rand(0.2, 0.6) }),
+      sakura: first => ({ x: rand(0, W), y: first ? rand(0, H) : -20, s: rand(5, 10),
+                          vy: rand(0.6, 1.3), vx: rand(0.2, 0.9), rot: rand(0, 6.28),
+                          vr: rand(-0.03, 0.03), ph: rand(0, 6.28),
+                          col: pick(['#ffc9d9', '#ffb7ce', '#ffd6e3', '#ffe0ea']) }),
+      leaf: first => ({ x: rand(0, W), y: first ? rand(0, H) : -20, s: rand(7, 13),
+                        vy: rand(0.7, 1.5), vx: rand(-0.3, 0.6), rot: rand(0, 6.28),
+                        vr: rand(-0.03, 0.03), ph: rand(0, 6.28),
+                        flip: rand(0, 6.28), vf: rand(0.02, 0.05),
+                        col: pick(['#d9531e', '#e8892b', '#c0392b', '#b8860b', '#a0522d', '#e2b13c']) }),
+      gull: first => {
+        const dir = Math.random() < 0.5 ? 1 : -1;
+        return { x: first ? rand(0, W) : (dir > 0 ? -60 : W + 60), y: rand(H * 0.06, H * 0.45),
+                 s: rand(14, 28), vx: dir * rand(0.5, 1.4), ph: rand(0, 6.28),
+                 fs: rand(0.002, 0.004), bob: rand(8, 22) };
+      }
+    };
+    const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+    const n = season === 'gull' ? clamp(Math.round(W * H / 160000), 4, 8)
+            : season === 'snow' ? clamp(Math.round(W * H / 14000), 40, 110)
+            : clamp(Math.round(W * H / 22000), 25, 70);
+    const ps = Array.from({ length: n }, () => make[season](true));
+
+    const draw = {
+      snow(p, t) {
+        p.y += p.vy; p.x += Math.sin(t * 0.001 + p.ph) * p.sw;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.283);
+        ctx.fillStyle = 'rgba(255,255,255,0.92)';
+        ctx.shadowColor = 'rgba(110,150,200,0.55)'; ctx.shadowBlur = 4;
+        ctx.fill();
+      },
+      sakura(p, t) {
+        p.y += p.vy; p.x += p.vx + Math.sin(t * 0.0012 + p.ph) * 0.6; p.rot += p.vr;
+        const s = p.s;
+        ctx.save();
+        ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+        ctx.scale(1, 0.6 + 0.4 * Math.abs(Math.sin(t * 0.002 + p.ph)));
+        ctx.beginPath();
+        ctx.moveTo(0, s * 0.7);
+        ctx.bezierCurveTo(-s * 0.9, s * 0.2, -s * 0.7, -s * 0.8, -s * 0.15, -s * 0.9);
+        ctx.lineTo(0, -s * 0.62);
+        ctx.lineTo(s * 0.15, -s * 0.9);
+        ctx.bezierCurveTo(s * 0.7, -s * 0.8, s * 0.9, s * 0.2, 0, s * 0.7);
+        ctx.fillStyle = p.col;
+        ctx.shadowColor = 'rgba(255,150,190,0.45)'; ctx.shadowBlur = 4;
+        ctx.fill();
+        ctx.restore();
+      },
+      leaf(p, t) {
+        p.y += p.vy; p.x += p.vx + Math.sin(t * 0.0013 + p.ph) * 0.9;
+        p.rot += p.vr; p.flip += p.vf;
+        const s = p.s;
+        ctx.save();
+        ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+        ctx.scale(Math.cos(p.flip), 1);
+        ctx.beginPath();
+        ctx.moveTo(0, -s);
+        ctx.bezierCurveTo(s * 0.8, -s * 0.5, s * 0.8, s * 0.5, 0, s);
+        ctx.bezierCurveTo(-s * 0.8, s * 0.5, -s * 0.8, -s * 0.5, 0, -s);
+        ctx.fillStyle = p.col;
+        ctx.shadowColor = 'rgba(0,0,0,0.3)'; ctx.shadowBlur = 3;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        ctx.beginPath(); ctx.moveTo(0, -s); ctx.lineTo(0, s * 1.25);
+        ctx.strokeStyle = 'rgba(90,40,10,0.55)'; ctx.lineWidth = 1; ctx.stroke();
+        ctx.restore();
+      },
+      gull(p, t) {
+        p.x += p.vx;
+        const y = p.y + Math.sin(t * 0.0008 + p.ph) * p.bob;
+        const a = Math.sin(t * p.fs * 2.2 + p.ph);   // 羽ばたき(-1〜1)
+        const s = p.s;
+        ctx.save();
+        ctx.translate(p.x, y);
+        ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+        const wings = (color, width) => {
+          ctx.strokeStyle = color; ctx.lineWidth = width;
+          ctx.beginPath();
+          ctx.moveTo(-s, -a * s * 0.35 + s * 0.12);
+          ctx.quadraticCurveTo(-s * 0.5, -s * 0.5 - a * s * 0.45, 0, 0);
+          ctx.quadraticCurveTo(s * 0.5, -s * 0.5 - a * s * 0.45, s, -a * s * 0.35 + s * 0.12);
+          ctx.stroke();
+        };
+        wings('rgba(60,85,110,0.55)', s * 0.2);    // 縁取り
+        wings('rgba(255,255,255,0.97)', s * 0.11); // 翼
+        ctx.restore();
+      }
+    }[season];
+
+    const out = p => season === 'gull'
+      ? (p.x < -80 || p.x > W + 80)
+      : (p.y > H + 30 || p.x > W + 40 || p.x < -40);
+
+    (function loop(t) {
+      if (!idle()) {
+        ctx.clearRect(0, 0, W, H);
+        for (let i = 0; i < ps.length; i++) {
+          ctx.shadowBlur = 0;
+          draw(ps[i], t);
+          if (out(ps[i])) ps[i] = make[season](false);
+        }
+      }
+      requestAnimationFrame(loop);
+    })(0);
+  }
+
   function schedule(fn, first, min, max) {
     setTimeout(function tick() {
       if (!idle()) fn();
       setTimeout(tick, rand(min, max));
     }, first);
   }
-  schedule(meteorShow,      2500,  7000, 16000);
-  //schedule(lighthouseFlash, 4500, 11000, 24000);
+
+  if (seasonal) startSeasonal();            // ?fx=2 : 流れ星の代わりに季節エフェクト
+  else schedule(meteorShow, 2500, 7000, 16000);
 
   schedule(lighthouseFlash, 9000, 22000, 48000);
 })();
