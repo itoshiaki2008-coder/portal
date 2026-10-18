@@ -1091,11 +1091,11 @@ window.addEventListener('popstate', () => { if (sandboxLayer.classList.contains(
                           vy: rand(0.6, 1.3), vx: rand(0.2, 0.9), rot: rand(0, 6.28),
                           vr: rand(-0.03, 0.03), ph: rand(0, 6.28),
                           col: pick(['#ffc9d9', '#ffb7ce', '#ffd6e3', '#ffe0ea']) }),
-      leaf: first => ({ x: rand(0, W), y: first ? rand(0, H) : -20, s: rand(7, 13),
-                        vy: rand(0.7, 1.5), vx: rand(-0.3, 0.6), rot: rand(0, 6.28),
-                        vr: rand(-0.03, 0.03), ph: rand(0, 6.28),
-                        flip: rand(0, 6.28), vf: rand(0.02, 0.05),
-                        col: pick(['#d9531e', '#e8892b', '#c0392b', '#b8860b', '#a0522d', '#e2b13c']) }),
+      leaf: first => ({ x: rand(W * 0.1, W * 0.9), y: first ? rand(0, H) : -30, s: rand(14, 20),
+                        vy: rand(0.7, 1.3), vx: rand(-0.3, 0.5), rot: rand(0, 6.28),
+                        vr: rand(-0.02, 0.02), ph: rand(0, 6.28),
+                        flip: rand(0, 6.28), vf: rand(0.02, 0.04),
+                        col: pick(['#c62828', '#d84315', '#e8590c', '#f08c00', '#b71c1c']) }),
       gull: first => {
         const dir = Math.random() < 0.5 ? 1 : -1;
         return { x: first ? rand(0, W) : (dir > 0 ? -60 : W + 60), y: rand(H * 0.06, H * 0.45),
@@ -1106,6 +1106,7 @@ window.addEventListener('popstate', () => { if (sandboxLayer.classList.contains(
     const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
     const n = season === 'gull' ? clamp(Math.round(W * H / 160000), 4, 8)
             : season === 'snow' ? clamp(Math.round(W * H / 14000), 40, 110)
+            : season === 'leaf' ? 0   // 落葉は10秒に1枚、下のループで追加
             : clamp(Math.round(W * H / 22000), 25, 70);
     const ps = Array.from({ length: n }, () => make[season](true));
 
@@ -1138,19 +1139,29 @@ window.addEventListener('popstate', () => { if (sandboxLayer.classList.contains(
         p.y += p.vy; p.x += p.vx + Math.sin(t * 0.0013 + p.ph) * 0.9;
         p.rot += p.vr; p.flip += p.vf;
         const s = p.s;
+        // 楓（もみじ）の輪郭：右半分の頂点を左右対称に展開
+        const half = [[0.17,-0.68],[0.30,-0.76],[0.30,-0.40],[0.62,-0.52],[0.55,-0.28],
+                      [0.95,-0.12],[0.62,0.08],[0.70,0.28],[0.28,0.30],[0.08,0.50],[0.05,0.62]];
         ctx.save();
         ctx.translate(p.x, p.y); ctx.rotate(p.rot);
         ctx.scale(Math.cos(p.flip), 1);
         ctx.beginPath();
         ctx.moveTo(0, -s);
-        ctx.bezierCurveTo(s * 0.8, -s * 0.5, s * 0.8, s * 0.5, 0, s);
-        ctx.bezierCurveTo(-s * 0.8, s * 0.5, -s * 0.8, -s * 0.5, 0, -s);
+        half.forEach(q => ctx.lineTo(q[0] * s, q[1] * s));
+        for (let i = half.length - 1; i >= 0; i--) ctx.lineTo(-half[i][0] * s, half[i][1] * s);
+        ctx.closePath();
         ctx.fillStyle = p.col;
+        ctx.lineJoin = 'round';
         ctx.shadowColor = 'rgba(0,0,0,0.3)'; ctx.shadowBlur = 3;
         ctx.fill();
         ctx.shadowBlur = 0;
-        ctx.beginPath(); ctx.moveTo(0, -s); ctx.lineTo(0, s * 1.25);
-        ctx.strokeStyle = 'rgba(90,40,10,0.55)'; ctx.lineWidth = 1; ctx.stroke();
+        ctx.strokeStyle = 'rgba(70,20,10,0.5)'; ctx.lineWidth = 1;
+        ctx.beginPath();                                   // 葉脈と柄
+        ctx.moveTo(0, -s * 0.9); ctx.lineTo(0, s * 0.62);
+        ctx.moveTo(0, s * 0.4);  ctx.lineTo(s * 0.85, -s * 0.1);
+        ctx.moveTo(0, s * 0.4);  ctx.lineTo(-s * 0.85, -s * 0.1);
+        ctx.moveTo(0, s * 0.62); ctx.lineTo(0, s * 1.05);
+        ctx.stroke();
         ctx.restore();
       },
       gull(p, t) {
@@ -1179,17 +1190,26 @@ window.addEventListener('popstate', () => { if (sandboxLayer.classList.contains(
       ? (p.x < -80 || p.x > W + 80)
       : (p.y > H + 30 || p.x > W + 40 || p.x < -40);
 
+    // 落葉は10秒に1枚だけ追加（最初の1枚は約1秒後）
+    let nextLeaf = performance.now() + 1000;
     (function loop(t) {
       if (!idle()) {
+        if (season === 'leaf' && t >= nextLeaf) {
+          ps.push(make.leaf(false));
+          nextLeaf = t + 10000;
+        }
         ctx.clearRect(0, 0, W, H);
-        for (let i = 0; i < ps.length; i++) {
+        for (let i = ps.length - 1; i >= 0; i--) {
           ctx.shadowBlur = 0;
           draw(ps[i], t);
-          if (out(ps[i])) ps[i] = make[season](false);
+          if (out(ps[i])) {
+            if (season === 'leaf') ps.splice(i, 1);   // 落葉は画面外に出たら消す
+            else ps[i] = make[season](false);
+          }
         }
       }
       requestAnimationFrame(loop);
-    })(0);
+    })(performance.now());
   }
 
   function schedule(fn, first, min, max) {
