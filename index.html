@@ -1178,7 +1178,7 @@ window.addEventListener('popstate', () => { if (sandboxLayer.classList.contains(
     };
     const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
     const timed = season !== 'sakura';   // 雪・かもめ・落葉は「時間間隔で1つずつ」追加
-    const n = timed ? 0 : clamp(Math.round(W * H / 22000), 25, 70);
+    const n = timed ? 0 : clamp(Math.round(W * H / 22000), 1, 3);
     const ps = Array.from({ length: n }, () => make[season](true));
 
     const draw = {
