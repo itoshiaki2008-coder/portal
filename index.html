@@ -280,8 +280,10 @@ h1 {
   border-radius: 100px; padding: 3px 14px; margin-bottom: 0.9rem;
 }
 html.og-jci .og-badge { display: inline-block; }
-.internal-only { display: none; }                 /* 外部用では非表示 */
-html.og-jci .internal-only { display: flex; }     /* 部内用（?og=JCI）のみ表示 */
+/* ※ .tool-card { display:flex } より後ろ・高い詳細度で効かせるため、.tool-card と併記する */
+.tool-card.internal-only { display: none; }                  /* 部内用のみ表示（外部用では非表示） */
+html.og-jci .tool-card.internal-only { display: flex; }
+html.og-jci .tool-card.external-only { display: none; }      /* 外部用のみ表示（部内用では非表示） */
 
 .tools-grid {
   display: grid;
@@ -948,7 +950,7 @@ html.og-jci .internal-only { display: flex; }     /* 部内用（?og=JCI）の�
     <div class="tools-grid">
 
       <!-- F-01 Exercise （仮タイトル・仮説明） -->
-      <div class="tool-card theme-purple" data-tool-url="https://itoshiaki2008-coder.github.io/Exercise/">
+      <div class="tool-card theme-purple external-only" data-tool-url="https://itoshiaki2008-coder.github.io/Exercise/">
         <div class="accent-line"></div><div class="card-index">F-01</div>
         <div class="card-icon">📝</div>
         <div class="card-body">
