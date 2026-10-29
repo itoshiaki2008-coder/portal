@@ -41,6 +41,9 @@ if (new URLSearchParams(location.search).get('og') === 'kgtsnpk') document.docum
   --border2:    rgba(144,202,249,0.2);
   --card-bg:    rgba(13,53,97,0.45);
   --card-hover: rgba(21,101,192,0.3);
+  @media (min-width: 601px) {
+  .tools-grid > .tool-card { grid-column: auto !important; }
+}
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
