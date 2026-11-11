@@ -13,7 +13,7 @@
   var VALID_MIN  = 10;                 // 有効時間（分）
   var STORE_KEY  = 'portal_gate_exp';  // 同一ドメイン（portal/ul 等）で共有されるキー
   var SALT       = 'portal:';
-  var TITLE      = '社内限定';
+  var TITLE      = '機構職員限定';
   // =================
 
   function rotr(n,x){return (x>>>n)|(x<<(32-n));}
