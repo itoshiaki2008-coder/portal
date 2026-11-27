@@ -10,7 +10,7 @@
   'use strict';
   // ===== 設定 =====
   var PASS_HASH  = '0d311d0c410721b169225badc1bdb8fd64c2a96be6484f45f4cfc05140f9586d';
-  var VALID_MIN  = 10;                 // 有効時間（分）
+  var VALID_MIN  = 60;                 // 有効時間（分）
   var STORE_KEY  = 'portal_gate_exp';  // 同一ドメイン（portal/ul 等）で共有されるキー
   var SALT       = 'portal:';
   var TITLE      = '機構職員限定';
