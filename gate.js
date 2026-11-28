@@ -11,7 +11,7 @@
   'use strict';
   // ===== 設定 =====
   var PASS_HASH  = '0d311d0c410721b169225badc1bdb8fd64c2a96be6484f45f4cfc05140f9586d';
-  var IDLE_MIN   = 20;                 // 無操作がこの時間（分）続いたらロック（操作のたびに延長）
+  var IDLE_MIN   = 60;                 // 無操作がこの時間（分）続いたらロック（操作のたびに延長）
   var STORE_KEY  = 'portal_gate_exp';  // 同一ドメイン（portal/ul 等）で共有されるキー
   var SALT       = 'portal:';
   var TITLE      = '機構職員限定';
